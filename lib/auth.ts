@@ -5,9 +5,17 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const AUTH_SECRET = process.env.AUTH_SECRET;
 
-if (!ADMIN_EMAIL || !ADMIN_PASSWORD || !AUTH_SECRET) {
-  throw new Error("Missing required admin authentication environment variables.");
+function requireEnv(value: string | undefined, name: string): string {
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value;
 }
+
+const adminEmail = requireEnv(ADMIN_EMAIL, "ADMIN_EMAIL");
+const adminPassword = requireEnv(ADMIN_PASSWORD, "ADMIN_PASSWORD");
+const authSecret = requireEnv(AUTH_SECRET, "AUTH_SECRET");
+
 const COOKIE_NAME = "kairu_admin_session";
 
 // Sign session token
@@ -18,7 +26,7 @@ export function signSession(email: string): string {
   });
   const encodedPayload = Buffer.from(payload).toString("base64url");
   const signature = crypto
-    .createHmac("sha256", AUTH_SECRET)
+    .createHmac("sha256", authSecret)
     .update(encodedPayload)
     .digest("base64url");
   return `${encodedPayload}.${signature}`;
@@ -31,7 +39,7 @@ export function verifySession(token: string): { email: string } | null {
     if (!encodedPayload || !signature) return null;
 
     const expectedSignature = crypto
-      .createHmac("sha256", AUTH_SECRET)
+      .createHmac("sha256", authSecret)
       .update(encodedPayload)
       .digest("base64url");
 
@@ -48,7 +56,8 @@ export function verifySession(token: string): { email: string } | null {
 
 // Authenticate admin credentials
 export function validateCredentials(email: string, pass: string): boolean {
-  return email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && pass === ADMIN_PASSWORD;
+  return email.toLowerCase() === adminEmail.toLowerCase()
+    && pass === adminPassword;
 }
 
 // Check if current server request is authenticated
