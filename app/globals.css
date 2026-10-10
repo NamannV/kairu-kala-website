@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  --maroon: #4B1718;
+  --maroon-dark: #300E0F;
+  --maroon-deep: #220809;
+  --maroon-light: #641F20;
+  --cream: #F7E9C7;
+  --cream-light: #FCFAF4;
+  --cream-muted: #EADBBA;
+  --sand: #DCC8A0;
+  --sand-dark: #C2AB80;
+  --charcoal: #282522;
+  --charcoal-dark: #191715;
+  --offwhite: #FCFAF4;
+}
+
+@theme {
+  --color-maroon: #4B1718;
+  --color-maroon-dark: #300E0F;
+  --color-maroon-deep: #220809;
+  --color-maroon-light: #641F20;
+  --color-cream: #F7E9C7;
+  --color-cream-light: #FCFAF4;
+  --color-cream-muted: #EADBBA;
+  --color-sand: #DCC8A0;
+  --color-sand-dark: #C2AB80;
+  --color-charcoal: #282522;
+  --color-charcoal-dark: #191715;
+  --color-offwhite: #FCFAF4;
+
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: #4B1718;
+  color: #F7E9C7;
+}
+
+body {
+  background-color: #4B1718;
+  color: #F7E9C7;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #F7E9C7;
+  color: #4B1718;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #300E0F;
+}
+::-webkit-scrollbar-thumb {
+  background: #641F20;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #DCC8A0;
+}
+
+/* Geometric Motif Overlay Utility */
+.bg-grid-pattern {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(220, 200, 160, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 200, 160, 0.05) 1px, transparent 1px);
+}
+
+.bg-grid-pattern-light {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(75, 23, 24, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(75, 23, 24, 0.06) 1px, transparent 1px);
+}
+
+/* Kairu Kala Geometric Brand Motif */
+.bg-kairu-pattern {
+  background-image: url('/images/footer-pattern.png');
+  background-repeat: repeat;
+  background-size: 280px 280px;
+}
+
+/* Kairu Kala Studio Philosophy Architectural Motif */
+.bg-philosophy-pattern {
+  background-image: url('/images/philosophy-pattern.png');
+  background-repeat: repeat;
+  background-size: 340px auto;
+}
+
+/* Perspective viewport helper */
+.perspective-1200 {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
