@@ -1,9 +1,13 @@
 import { cookies } from "next/headers";
 import crypto from "crypto";
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@kairukala.com";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "kairukala2026";
-const AUTH_SECRET = process.env.AUTH_SECRET || "kairu-kala-architectural-studio-secret-key-2026";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const AUTH_SECRET = process.env.AUTH_SECRET;
+
+if (!ADMIN_EMAIL || !ADMIN_PASSWORD || !AUTH_SECRET) {
+  throw new Error("Missing required admin authentication environment variables.");
+}
 const COOKIE_NAME = "kairu_admin_session";
 
 // Sign session token
